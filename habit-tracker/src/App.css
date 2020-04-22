@@ -1,0 +1,24 @@
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+button {
+  border-radius: 5px;
+  padding: 3px 8px;
+  margin: 0 0 5px 5px;
+  background-color: blue;
+  color: white;
+  font-size: 16px;
+  transition: ease-in 0.2s;
+}
+
+button:disabled {
+  background-color: cornflowerblue;
+  transition: ease-in 0.2s;
+}
+
+input[type="text"] {
+  font-size: 16px;
+  width: 200px;
+}
