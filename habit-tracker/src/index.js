@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { Auth0Provider, useAuth0 } from "./utils/auth";
+import { Auth0Provider } from "./utils/auth";
 import history from "./utils/history";
 import App from "./App";
 import ApolloWrapper from "./ApolloWrapper";

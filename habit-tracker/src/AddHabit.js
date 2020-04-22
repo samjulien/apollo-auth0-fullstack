@@ -1,6 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { useMutation, gql } from "@apollo/client";
-import { useAuth0 } from "./utils/auth";
 import { HABITS_QUERY } from "./App";
 
 const ADD_HABIT_MUTATION = gql`
@@ -21,26 +20,13 @@ const ADD_HABIT_MUTATION = gql`
 
 function AddHabit() {
   const [description, setDescription] = useState(null);
-  // const { isAuthenticated, getTokenSilently } = useAuth0();
-  // const [bearerToken, setBearerToken] = React.useState("");
-
-  // useEffect(() => {
-  //   const getToken = async () => {
-  //     const token = isAuthenticated ? await getTokenSilently() : "";
-  //     setBearerToken(`Bearer ${token}`);
-  //   };
-  //   getToken();
-  // }, [getTokenSilently, isAuthenticated]);
-
-  const [createHabit, { error: mutationError }] = useMutation(
+  const [createHabit, { error: mutationError, loading }] = useMutation(
     ADD_HABIT_MUTATION,
     {
-      // context: {
-      //   headers: {
-      //     authorization: bearerToken,
-      //   },
-      // },
+      // I'm using refetchQueries here since it's a protected mutation,
+      // but I'm open to suggestions here.
       refetchQueries: [{ query: HABITS_QUERY }],
+      // Here's how you'd do it by updating the cache:
       // update(cache, { data: { createHabit } }) {
       //   const { habits } = cache.readQuery({ query: HABITS_QUERY });
       //   cache.writeQuery({
@@ -81,8 +67,12 @@ function AddHabit() {
         onChange={handleChange}
         onKeyDown={onEnterPress}
       />
-      <button type="button" disabled={!description} onClick={addHabit}>
-        Add
+      <button
+        type="button"
+        disabled={!description || loading}
+        onClick={addHabit}
+      >
+        Add{loading ? "ing..." : ""}
       </button>
     </>
   );

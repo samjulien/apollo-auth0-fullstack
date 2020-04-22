@@ -1,5 +1,5 @@
 const { GraphQLDateTime } = require("graphql-iso-date");
-const { UserInputError } = require("apollo-server");
+const { UserInputError, AuthenticationError } = require("apollo-server");
 const db = require("./models");
 
 const resolvers = {
@@ -24,7 +24,10 @@ const resolvers = {
     },
   },
   Mutation: {
-    createHabit(_, { input }) {
+    createHabit(_, { input }, { isAuthenticated }) {
+      if (!isAuthenticated) {
+        throw new AuthenticationError("Not logged in!");
+      }
       if (!input.description) {
         throw new UserInputError("Description missing!");
       }

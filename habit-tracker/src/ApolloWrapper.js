@@ -18,16 +18,18 @@ function ApolloWrapper({ children }) {
   useEffect(() => {
     const getToken = async () => {
       const token = isAuthenticated ? await getTokenSilently() : "";
-      setBearerToken(`Bearer ${token}`);
+      setBearerToken(token);
     };
     getToken();
   }, [getTokenSilently, isAuthenticated]);
 
   const authLink = setContext((_, { headers }) => {
+    if (!bearerToken) return { headers };
+
     return {
       headers: {
         ...headers,
-        authorization: bearerToken,
+        authorization: `Bearer: ${bearerToken}`,
       },
     };
   });

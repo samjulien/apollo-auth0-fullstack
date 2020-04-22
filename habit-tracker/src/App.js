@@ -5,6 +5,7 @@ import "./App.css";
 import AddHabit from "./AddHabit";
 import Loading from "./Loading";
 import Error from "./Error";
+import Habit from "./Habit";
 
 export const HABITS_QUERY = gql`
   query HABITS_QUERY {
@@ -81,23 +82,7 @@ function App() {
       </div>
       <ul style={{ margin: "10px", paddingInlineStart: "15px" }}>
         {data.habits.map((habit) => {
-          return (
-            <li key={habit.id}>
-              {`${habit.description} (${habit.points} points)`}
-              <ul>
-                {habit.entries &&
-                  habit.entries.map((entry) => {
-                    const date = new Date(entry.date).toLocaleDateString();
-                    const completed = entry.completed ? "✅" : "😑";
-                    return (
-                      <li
-                        key={entry.id}
-                      >{`${date}: ${entry.notes} ${completed}`}</li>
-                    );
-                  })}
-              </ul>
-            </li>
-          );
+          return <Habit key={habit.id} habit={habit} />;
         })}
       </ul>
     </div>
