@@ -27,7 +27,7 @@ function ApolloWrapper({ children }) {
     return {
       headers: {
         ...headers,
-        authorization: bearerToken ? bearerToken : "",
+        authorization: bearerToken,
       },
     };
   });

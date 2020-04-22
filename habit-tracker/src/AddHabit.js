@@ -21,16 +21,16 @@ const ADD_HABIT_MUTATION = gql`
 
 function AddHabit() {
   const [description, setDescription] = useState(null);
-  const { isAuthenticated, getTokenSilently } = useAuth0();
-  const [bearerToken, setBearerToken] = React.useState("");
+  // const { isAuthenticated, getTokenSilently } = useAuth0();
+  // const [bearerToken, setBearerToken] = React.useState("");
 
-  useEffect(() => {
-    const getToken = async () => {
-      const token = isAuthenticated ? await getTokenSilently() : "";
-      setBearerToken(`Bearer ${token}`);
-    };
-    getToken();
-  }, [getTokenSilently, isAuthenticated]);
+  // useEffect(() => {
+  //   const getToken = async () => {
+  //     const token = isAuthenticated ? await getTokenSilently() : "";
+  //     setBearerToken(`Bearer ${token}`);
+  //   };
+  //   getToken();
+  // }, [getTokenSilently, isAuthenticated]);
 
   const [createHabit, { error: mutationError }] = useMutation(
     ADD_HABIT_MUTATION,
