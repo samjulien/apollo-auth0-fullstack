@@ -51,11 +51,7 @@ function App() {
           </span>
         </h2>
         {!isAuthenticated && (
-          <button
-            onClick={loginWithRedirect}
-            type="button"
-            style={{ cursor: "pointer" }}
-          >
+          <button onClick={loginWithRedirect} type="button">
             Log In
           </button>
         )}
@@ -68,11 +64,7 @@ function App() {
               👋
             </span>
             !
-            <button
-              onClick={logout}
-              type="button"
-              style={{ fontSize: "12px", cursor: "pointer" }}
-            >
+            <button onClick={logout} type="button" style={{ fontSize: "12px" }}>
               Log Out
             </button>
             <br />

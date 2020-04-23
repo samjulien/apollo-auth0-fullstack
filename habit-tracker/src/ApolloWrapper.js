@@ -23,10 +23,11 @@ function ApolloWrapper({ children }) {
     getToken();
   }, [getTokenSilently, isAuthenticated]);
 
-  const authLink = setContext((_, { headers }) => {
-    if (!bearerToken) return { headers };
+  const authLink = setContext((_, { headers, ...rest }) => {
+    if (!bearerToken) return { headers, ...rest };
 
     return {
+      ...rest,
       headers: {
         ...headers,
         authorization: `Bearer: ${bearerToken}`,

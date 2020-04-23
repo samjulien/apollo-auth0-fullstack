@@ -7,7 +7,7 @@ const { verifyToken } = require("./src/utils/verifyToken");
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: async ({ req }) => {
+  context: async ({ req, ...rest }) => {
     let isAuthenticated = false;
     try {
       const authHeader = req.headers.authorization || "";
@@ -19,7 +19,7 @@ const server = new ApolloServer({
     } catch (error) {
       console.error(error);
     }
-    return { isAuthenticated };
+    return { ...rest, req, auth: { user, isAuthenticated } };
   },
 });
 

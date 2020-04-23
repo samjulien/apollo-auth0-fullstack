@@ -24,8 +24,8 @@ const resolvers = {
     },
   },
   Mutation: {
-    createHabit(_, { input }, { isAuthenticated }) {
-      if (!isAuthenticated) {
+    createHabit(_, { input }, { auth }) {
+      if (!auth.isAuthenticated) {
         throw new AuthenticationError("Not logged in!");
       }
       if (!input.description) {
