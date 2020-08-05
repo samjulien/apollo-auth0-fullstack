@@ -19,7 +19,7 @@ const server = new ApolloServer({
     } catch (error) {
       console.error(error);
     }
-    return { ...rest, req, auth: { user, isAuthenticated } };
+    return { ...rest, req, auth: { isAuthenticated } };
   },
 });
 

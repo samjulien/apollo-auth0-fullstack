@@ -5,7 +5,7 @@ import {
   HttpLink,
   ApolloProvider,
 } from "@apollo/client";
-import { setContext } from "@apollo/link-context";
+import { setContext } from "@apollo/client/link/context";
 import { useAuth0 } from "./utils/auth";
 
 function ApolloWrapper({ children }) {
