@@ -6,10 +6,10 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { useAuth0 } from "./utils/auth";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function ApolloWrapper({ children }) {
-  const { isAuthenticated, getTokenSilently } = useAuth0();
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [bearerToken, setBearerToken] = useState("");
   const httpLink = new HttpLink({
     uri: "http://localhost:4000",
@@ -17,11 +17,11 @@ function ApolloWrapper({ children }) {
 
   useEffect(() => {
     const getToken = async () => {
-      const token = isAuthenticated ? await getTokenSilently() : "";
+      const token = isAuthenticated ? await getAccessTokenSilently() : "";
       setBearerToken(token);
     };
     getToken();
-  }, [getTokenSilently, isAuthenticated]);
+  }, [getAccessTokenSilently, isAuthenticated]);
 
   const authLink = setContext((_, { headers, ...rest }) => {
     if (!bearerToken) return { headers, ...rest };

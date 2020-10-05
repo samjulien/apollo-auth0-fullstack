@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
-import { useAuth0 } from "./utils/auth";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./App.css";
 import AddHabit from "./AddHabit";
 import Loading from "./Loading";
@@ -25,7 +25,7 @@ export const HABITS_QUERY = gql`
 
 function App() {
   const {
-    loading: authLoading,
+    isLoading: authLoading,
     isAuthenticated,
     loginWithRedirect,
     logout,
